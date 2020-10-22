@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.scss"],"names":[],"mappings":"AAAA,6BAEI,aAAiB,CAFrB,sEAUM,iBAAkB","file":"0.7c951839.chunk.css","sourcesContent":["#maze_login_page {\n  .brand-logo {\n    margin: 0rem 1rem;\n    .logo {\n      margin-right: 10px;\n    }\n  }\n\n  #back_to_home {\n    svg {\n      margin-right: 10px;\n    }\n  }\n}\n"]}

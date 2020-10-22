@@ -1,12 +1,20 @@
 const express = require("express");
+
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const router = express.Router();
 const cors = require("cors");
 
 const users = require("./routes/api/users");
 
 const app = express();
+
+app.use(express.static(__dirname + "/build/"));
+app.use(express.static(__dirname + "/build/static/js"));
+app.use(express.static(__dirname + "/build/static/css"));
+app.use(express.static(__dirname + "/build/static/media"));
+
 app.use(
   cors({
     origin: "http://localhost:3001",
@@ -38,6 +46,15 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
+
+// @route GET register
+// @desc Register user
+// @access Public
+app.get("/login", (req, res) => {
+  // res.sendFile(__dirname + "/build/index.html");
+  console.log("AAA");
+  res.sendFile("index.html", { root: __dirname + "/build" });
+});
 
 const port = process.env.PORT || 5000;
 
