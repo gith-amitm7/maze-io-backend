@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const router = express.Router();
-// const cors = require("cors");
+const cors = require("cors");
 
 const users = require("./routes/api/users");
 
@@ -15,11 +15,7 @@ app.use(express.static(__dirname + "/build/static/js"));
 app.use(express.static(__dirname + "/build/static/css"));
 app.use(express.static(__dirname + "/build/static/media"));
 
-// app.use(
-//   // cors({
-//   //   origin: "http://localhost:3001",
-//   // })
-// );
+app.use(cors());
 
 // Bodyparser middleware
 app.use(
