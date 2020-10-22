@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const router = express.Router();
-const cors = require("cors");
+// const cors = require("cors");
 
 const users = require("./routes/api/users");
 
@@ -15,11 +15,11 @@ app.use(express.static(__dirname + "/build/static/js"));
 app.use(express.static(__dirname + "/build/static/css"));
 app.use(express.static(__dirname + "/build/static/media"));
 
-app.use(
-  cors({
-    origin: "http://localhost:3001",
-  })
-);
+// app.use(
+//   // cors({
+//   //   origin: "http://localhost:3001",
+//   // })
+// );
 
 // Bodyparser middleware
 app.use(
@@ -52,7 +52,6 @@ app.use("/api/users", users);
 // @access Public
 app.get("/login", (req, res) => {
   // res.sendFile(__dirname + "/build/index.html");
-  console.log("AAA");
   res.sendFile("index.html", { root: __dirname + "/build" });
 });
 
