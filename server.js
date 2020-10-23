@@ -51,6 +51,16 @@ app.get("/login", (req, res) => {
   res.sendFile("index.html", { root: __dirname + "/build" });
 });
 
+app.get("/register", (req, res) => {
+  // res.sendFile(__dirname + "/build/index.html");
+  res.sendFile("index.html", { root: __dirname + "/build" });
+});
+
+app.get("/dashboard", (req, res) => {
+  // res.sendFile(__dirname + "/build/index.html");
+  res.sendFile("index.html", { root: __dirname + "/build" });
+});
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));

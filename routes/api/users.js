@@ -90,12 +90,12 @@ router.post("/login", (req, res) => {
           payload,
           keys.secretOrKey,
           {
-            expiresIn: 31556926, // 1 year in seconds
+            expiresIn: 10 * 60 * 60, // 10 mins in seconds
           },
           (err, token) => {
             res.json({
               success: true,
-              token: "Bearer " + token,
+              token: token,
               user: {
                 email: user.email,
                 name: user.name,
@@ -111,6 +111,45 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+// @route POST api/users/validate-session
+// @desc validate session and return user info
+// @access Public
+router.post("/validate-session", (req, res) => {
+  const token = req.body.token;
+
+  if (!token) return res.status(400).json("No token recieved");
+
+  try {
+    var decoded = jwt.verify(token, keys.secretOrKey);
+
+    User.findOne({ _id: decoded.id })
+      .then((user) => {
+        res.json({
+          success: true,
+          token: "Bearer ",
+          user: {
+            email: user.email,
+            name: user.name,
+            networkId: user.networkId,
+          },
+        });
+      })
+      .catch((err) => {
+        res.json({
+          success: false,
+          message: "User not found",
+        });
+      });
+  } catch (err) {
+    // err
+    console.log("Error while decoding");
+    res.json({
+      success: false,
+      message: "Token could not be decoded",
+    });
+  }
 });
 
 module.exports = router;
